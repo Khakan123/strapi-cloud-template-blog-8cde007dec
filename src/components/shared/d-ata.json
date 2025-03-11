@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_d_ata",
+  "info": {
+    "displayName": "DAta",
+    "icon": "archive"
+  },
+  "options": {},
+  "attributes": {
+    "news": {
+      "type": "blocks"
+    }
+  }
+}

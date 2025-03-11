@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_new_category_units",
+  "info": {
+    "displayName": "Unit",
+    "icon": "bold",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "unit_name": {
+      "type": "string",
+      "required": true
+    },
+    "sub_units": {
+      "displayName": "subunits",
+      "type": "component",
+      "repeatable": true,
+      "component": "new-category.subunits"
+    }
+  }
+}

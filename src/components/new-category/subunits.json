@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_new_category_subunits",
+  "info": {
+    "displayName": "subunits",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  }
+}

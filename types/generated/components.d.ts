@@ -1,53 +1,60 @@
-import type { Struct, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SharedSlider extends Struct.ComponentSchema {
-  collectionName: 'components_shared_sliders';
+export interface NewCategoryModule extends Struct.ComponentSchema {
+  collectionName: 'components_new_category_modules';
   info: {
-    displayName: 'Slider';
-    icon: 'address-book';
     description: '';
+    displayName: 'Module';
+    icon: 'bold';
   };
   attributes: {
-    files: Schema.Attribute.Media<'images', true>;
+    module_name: Schema.Attribute.String;
+    unit: Schema.Attribute.Component<'new-category.unit', true>;
   };
 }
 
-export interface SharedSeo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_seos';
+export interface NewCategorySubUnit extends Struct.ComponentSchema {
+  collectionName: 'components_new_category_sub_units';
   info: {
-    name: 'Seo';
-    icon: 'allergies';
-    displayName: 'Seo';
-    description: '';
+    displayName: 'SubUnit';
   };
   attributes: {
-    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
-    metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    shareImage: Schema.Attribute.Media<'images'>;
+    article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'>;
   };
 }
 
-export interface SharedRichText extends Struct.ComponentSchema {
-  collectionName: 'components_shared_rich_texts';
+export interface NewCategorySubunits extends Struct.ComponentSchema {
+  collectionName: 'components_new_category_subunits';
   info: {
-    displayName: 'Rich text';
-    icon: 'align-justify';
-    description: '';
+    displayName: 'subunits';
+    icon: 'bulletList';
   };
   attributes: {
-    body: Schema.Attribute.RichText;
+    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
   };
 }
 
-export interface SharedQuote extends Struct.ComponentSchema {
-  collectionName: 'components_shared_quotes';
+export interface NewCategoryUnit extends Struct.ComponentSchema {
+  collectionName: 'components_new_category_units';
   info: {
-    displayName: 'Quote';
-    icon: 'indent';
+    description: '';
+    displayName: 'Unit';
+    icon: 'bold';
   };
   attributes: {
-    title: Schema.Attribute.String;
-    body: Schema.Attribute.Text;
+    sub_units: Schema.Attribute.Component<'new-category.subunits', true>;
+    unit_name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedDAta extends Struct.ComponentSchema {
+  collectionName: 'components_shared_d_ata';
+  info: {
+    displayName: 'DAta';
+    icon: 'archive';
+  };
+  attributes: {
+    news: Schema.Attribute.Blocks;
   };
 }
 
@@ -62,14 +69,70 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedQuote extends Struct.ComponentSchema {
+  collectionName: 'components_shared_quotes';
+  info: {
+    displayName: 'Quote';
+    icon: 'indent';
+  };
+  attributes: {
+    body: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SharedRichText extends Struct.ComponentSchema {
+  collectionName: 'components_shared_rich_texts';
+  info: {
+    description: '';
+    displayName: 'Rich text';
+    icon: 'align-justify';
+  };
+  attributes: {
+    body: Schema.Attribute.RichText;
+  };
+}
+
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    description: '';
+    displayName: 'Seo';
+    icon: 'allergies';
+    name: 'Seo';
+  };
+  attributes: {
+    metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    shareImage: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface SharedSlider extends Struct.ComponentSchema {
+  collectionName: 'components_shared_sliders';
+  info: {
+    description: '';
+    displayName: 'Slider';
+    icon: 'address-book';
+  };
+  attributes: {
+    files: Schema.Attribute.Media<'images', true>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'shared.slider': SharedSlider;
-      'shared.seo': SharedSeo;
-      'shared.rich-text': SharedRichText;
-      'shared.quote': SharedQuote;
+      'new-category.module': NewCategoryModule;
+      'new-category.sub-unit': NewCategorySubUnit;
+      'new-category.subunits': NewCategorySubunits;
+      'new-category.unit': NewCategoryUnit;
+      'shared.d-ata': SharedDAta;
       'shared.media': SharedMedia;
+      'shared.quote': SharedQuote;
+      'shared.rich-text': SharedRichText;
+      'shared.seo': SharedSeo;
+      'shared.slider': SharedSlider;
     }
   }
 }
